@@ -1,88 +1,840 @@
-# Abed Kazi — Digital Portfolio
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abed Kazi — Digital Portfolio</title>
+    <style>
+        :root[data-theme="dark"] {
+            --bg: #0a0a0a;
+            --bg2: #111;
+            --bg3: #1a1a1a;
+            --bg4: #222;
+            --border: #333;
+            --border-hover: #c8f03c;
+            --text: #f0f0f0;
+            --text-muted: #aaa;
+            --text-dim: #666;
+            --accent: #c8f03c;
+            --accent-dark: #a0c030;
+            --card-bg: #1a1a1a;
+            --nav-bg: rgba(10,10,10,0.95);
+        }
+        :root[data-theme="light"] {
+            --bg: #f5f5f0;
+            --bg2: #efefea;
+            --bg3: #e8e8e2;
+            --bg4: #ddd;
+            --border: #ccc;
+            --border-hover: #6a9a00;
+            --text: #111;
+            --text-muted: #555;
+            --text-dim: #999;
+            --accent: #6a9a00;
+            --accent-dark: #4a7a00;
+            --card-bg: #fff;
+            --nav-bg: rgba(245,245,240,0.95);
+        }
 
-A professional student portfolio website showcasing achievements, certifications, projects, and contact information.
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
-🌐 **Live Site:** [https://abedkazi.github.io/portfolio](https://abedkazi.github.io/portfolio)
+        html { scroll-behavior: smooth; }
 
----
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
 
-## Features
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 999;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+        .nav-logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 1px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+        .theme-toggle {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
-- **Dark / Light mode toggle**
-- **Scroll progress bar**
-- **Typed text animation** in hero section
-- **Scroll-reveal animations** on all sections
-- **Lightbox gallery** viewer
-- **Mobile responsive** with hamburger menu
-- **Sections:** Home · About · Achievements · Projects · Gallery · Contact
+        /* ── SECTIONS ── */
+        section {
+            padding: 100px 30px 60px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        section#home { padding-top: 140px; text-align: center; }
 
----
+        h2.section-title {
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+        .section-line {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 0 auto 50px;
+            border-radius: 2px;
+        }
+        .section-line.left { margin: 0 0 50px; }
 
-## Folder Structure
+        /* ── HOME ── */
+        .home-name {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            color: var(--accent);
+            font-weight: 800;
+            animation: fadeUp 0.7s ease both;
+        }
+        .home-sub {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin: 10px 0 30px;
+            animation: fadeUp 0.7s 0.15s ease both;
+        }
+        .home-desc {
+            max-width: 650px;
+            margin: 0 auto 40px;
+            font-size: 1.08rem;
+            color: var(--text-muted);
+            animation: fadeUp 0.7s 0.3s ease both;
+        }
+        .home-btns {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeUp 0.7s 0.45s ease both;
+        }
+        .btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.2s;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: #111;
+            border: 2px solid var(--accent);
+        }
+        .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+        .btn-outline {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+        .btn-outline:hover { background: var(--accent); color: #111; }
 
-```
-portfolio/
-├── index.html          ← Main website file
-├── README.md           ← This file
-└── assets/             ← All images go here
-    ├── photo.jpg               ← Your profile photo
-    ├── cert-matlab.jpg         ← MATLAB Coursera certificate
-    ├── cert-physics.jpg        ← Physics Coursera certificate
-    ├── cert-netcad.jpg         ← NetCAD certificate
-    ├── cert-yuvaal.jpg         ← Yuva AI certificate
-    ├── cert-ai4a.jpg           ← AI4A certificate
-    ├── project-drone.jpg       ← BWB Drone photo
-    ├── project-ai4a.jpg        ← AI4A project screenshot
-    ├── design-thinking.jpg     ← Design Thinking photo
-    ├── ace-award.jpg           ← ACE award photo
-    └── event1.jpg              ← Any event photo
-```
+        /* Profile photo */
+        .profile-wrap {
+            margin: 60px auto 0;
+            width: 200px;
+            animation: fadeUp 0.7s 0.6s ease both;
+        }
+        .profile-wrap img {
+            width: 100%;
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+            box-shadow: 0 0 40px rgba(200,240,60,0.25);
+        }
 
----
+        /* ── ABOUT ── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        @media(max-width:700px){ .about-grid { grid-template-columns: 1fr; } }
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+        .info-list { list-style: none; margin-top: 20px; }
+        .info-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.97rem;
+            display: flex;
+            gap: 12px;
+        }
+        .info-list li span.label { color: var(--text-dim); min-width: 110px; }
+        .info-list li span.val { color: var(--text); }
+        .cards-mini {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .mini-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 16px;
+            transition: 0.3s;
+        }
+        .mini-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+        .mini-card .icon { font-size: 1.6rem; margin-bottom: 8px; }
+        .mini-card h4 { color: var(--accent); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .mini-card p { color: var(--text-muted); font-size: 0.88rem; }
 
-## How to Deploy on GitHub Pages
+        /* ── ACHIEVEMENTS ── */
+        .ach-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+        }
+        .ach-tab {
+            padding: 8px 22px;
+            border-radius: 25px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .ach-tab.active, .ach-tab:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--bg3);
+        }
+        .ach-panel { display: none; }
+        .ach-panel.active { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .ach-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px 20px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .ach-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: 0.3s;
+            transform-origin: left;
+        }
+        .ach-card:hover::after { transform: scaleX(1); }
+        .ach-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+        .ach-badge {
+            display: inline-block;
+            background: var(--bg3);
+            color: var(--accent);
+            font-size: 0.72rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        .ach-card h3 { font-size: 1.05rem; color: var(--text); margin-bottom: 8px; }
+        .ach-card p { font-size: 0.9rem; color: var(--text-muted); }
 
-1. Create a new GitHub repository named `portfolio` (or `<yourusername>.github.io`)
-2. Upload all files: `index.html`, `README.md`, and the `assets/` folder with your images
-3. Go to **Settings → Pages**
-4. Under **Source**, select `main` branch and `/ (root)` folder
-5. Click **Save** — your site will be live in ~2 minutes at `https://<yourusername>.github.io/portfolio`
+        /* ── PROJECTS ── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .proj-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px 24px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .proj-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: 0.3s;
+            transform-origin: left;
+        }
+        .proj-card:hover::before { transform: scaleX(1); }
+        .proj-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+        .proj-tag {
+            display: inline-block;
+            background: var(--bg3);
+            color: var(--accent);
+            font-size: 0.72rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        .proj-card h3 { font-size: 1.1rem; color: var(--text); margin-bottom: 10px; }
+        .proj-card p { color: var(--text-muted); font-size: 0.93rem; margin-bottom: 18px; line-height: 1.7; }
+        .tech-row { display: flex; flex-wrap: wrap; gap: 7px; }
+        .tech-pill {
+            background: var(--bg3);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
 
----
+        /* ── GALLERY ── */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+        .cert-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .cert-item:hover { border-color: var(--accent); transform: scale(1.04); }
+        .cert-item img { width: 100%; height: 180px; object-fit: cover; display: block; }
+        .cert-label { padding: 14px 16px; font-size: 0.97rem; color: var(--text); background: var(--bg4); }
 
-## Personalising the Portfolio
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.96);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+        .lightbox.open { display: flex; }
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border: 4px solid var(--accent);
+            border-radius: 12px;
+        }
+        .lb-close {
+            position: absolute;
+            top: 20px; right: 30px;
+            font-size: 44px;
+            color: #fff;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .lb-close:hover { color: var(--accent); }
 
-Open `index.html` and update:
+        /* ── CONTACT ── */
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+        @media(max-width:700px){ .contact-wrap { grid-template-columns: 1fr; } }
+        .contact-info h3 { font-size: 1.4rem; color: var(--text); margin-bottom: 16px; }
+        .contact-info p { color: var(--text-muted); margin-bottom: 28px; font-size: 1rem; }
+        .contact-items { list-style: none; }
+        .contact-items li {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+        .contact-items li .ci { font-size: 1.2rem; }
+        .contact-form { display: flex; flex-direction: column; gap: 16px; }
+        .contact-form input,
+        .contact-form textarea {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text);
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: border 0.2s;
+            outline: none;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus { border-color: var(--accent); }
+        .contact-form textarea { min-height: 130px; resize: vertical; }
+        .contact-form button {
+            background: var(--accent);
+            color: #111;
+            border: none;
+            border-radius: 8px;
+            padding: 13px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .contact-form button:hover { background: var(--accent-dark); }
 
-| What | Where in the file |
-|------|-------------------|
-| Your email & phone | `#contact` section social links |
-| LinkedIn URL | `href="https://linkedin.com/in/abedkazi"` |
-| GitHub URL | `href="https://github.com/abedkazi"` |
-| Profile photo | Replace `assets/photo.jpg` and update the `hero-avatar` div |
-| Gallery images | Update `onclick="openLightbox('assets/...')"` paths |
-| Certificate images | Add `<img>` inside `.cert-card` divs |
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 36px 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-top: 60px;
+        }
+        footer span { color: var(--accent); }
 
----
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-## Certificates Included
+        /* ── MOBILE NAV ── */
+        @media(max-width:600px){
+            .nav-links { display: none; }
+            nav { justify-content: space-between; }
+        }
+    </style>
+</head>
+<body>
 
-| Certificate | Issuer | Date |
-|-------------|--------|------|
-| Introduction to Programming with MATLAB | Vanderbilt University / Coursera | Dec 2025 |
-| Engineering Physics Prerequisites | MIT Vishwaprayag University / Coursera | Sep 2025 |
-| NetCAD Network Academy | NetCAD | 2025 |
-| Yuva AI | Government of India | 2025 |
-| AI for All (AI4A) | National Initiative | 2025 |
+<!-- NAV -->
+<nav>
+    <div class="nav-logo">AK.</div>
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#achievements">Achievements</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+</nav>
 
----
+<!-- HOME -->
+<section id="home">
+    <div class="profile-wrap">
+        <img src="photo.jpg" alt="Abed Kazi"
+             onerror="this.src='https://via.placeholder.com/200x200/1a1a1a/c8f03c?text=AK';">
+    </div>
+    <h1 class="home-name" style="margin-top:30px;">Abed Kazi</h1>
+    <p class="home-sub">B.Tech · MIT Vishwaprayag University · Class of 2026</p>
+    <p class="home-desc">
+        Engineering student passionate about physics, chemistry, and AI —
+        building a foundation where science meets technology and curiosity drives progress.
+    </p>
+    <div class="home-btns">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-outline">Contact Me</a>
+    </div>
+</section>
 
-## Built With
+<!-- ABOUT -->
+<section id="about">
+    <h2 class="section-title">About Me</h2>
+    <div class="section-line left"></div>
+    <div class="about-grid reveal">
+        <div class="about-text">
+            <p>I'm Abed Kazi, a final-year B.Tech student at MIT Vishwaprayag University, Aurangabad. I've always been driven by a genuine curiosity — wanting to understand not just <em>what</em> things do, but <em>why</em> they work.</p>
+            <p>That curiosity led me through Physics and Chemistry, and eventually into the world of Artificial Intelligence — where I see the most exciting engineering challenges of our generation unfolding in real time.</p>
+            <p>My goal is to work at the intersection of AI and core engineering — building intelligent, reliable systems that solve real-world problems and make a meaningful impact.</p>
+            <ul class="info-list">
+                <li><span class="label">Name</span><span class="val">Abed Kazi</span></li>
+                <li><span class="label">Degree</span><span class="val">B.Tech Engineering</span></li>
+                <li><span class="label">University</span><span class="val">MIT Vishwaprayag University</span></li>
+                <li><span class="label">Location</span><span class="val">Aurangabad, Maharashtra</span></li>
+                <li><span class="label">Graduating</span><span class="val">2026</span></li>
+            </ul>
+        </div>
+        <div class="cards-mini">
+            <div class="mini-card">
+                <div class="icon">🎯</div>
+                <h4>Career Goal</h4>
+                <p>AI & engineering roles building intelligent real-world systems.</p>
+            </div>
+            <div class="mini-card">
+                <div class="icon">🔬</div>
+                <h4>Core Interests</h4>
+                <p>Physics, Chemistry, Artificial Intelligence, Machine Learning.</p>
+            </div>
+            <div class="mini-card">
+                <div class="icon">📚</div>
+                <h4>Learning</h4>
+                <p>Advanced AI concepts, design thinking, modern software practices.</p>
+            </div>
+            <div class="mini-card">
+                <div class="icon">🌱</div>
+                <h4>Philosophy</h4>
+                <p>Curiosity is the engine of progress. Every question matters.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-- Pure HTML5, CSS3, JavaScript (no frameworks)
-- Google Fonts: Syne + DM Sans
-- Fully self-contained single file
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+    <h2 class="section-title">Achievements</h2>
+    <div class="section-line left"></div>
 
----
+    <div class="ach-tabs">
+        <button class="ach-tab active" onclick="switchTab(this,'tab-all')">All</button>
+        <button class="ach-tab" onclick="switchTab(this,'tab-ai')">AI Programs</button>
+        <button class="ach-tab" onclick="switchTab(this,'tab-courses')">Courses</button>
+        <button class="ach-tab" onclick="switchTab(this,'tab-events')">Events</button>
+    </div>
 
-*© 2025 Abed Kazi · Aurangabad, Maharashtra*
+    <!-- ALL -->
+    <div id="tab-all" class="ach-panel active reveal">
+        <div class="ach-card">
+            <span class="ach-badge">AI Program</span>
+            <h3>AI for All (Ai4A)</h3>
+            <p>Completed the national AI for All program exploring AI applications across healthcare, education, and industry.</p>
+        </div>
+        <div class="ach-card">
+            <span class="ach-badge">AI Program</span>
+            <h3>Yuva AI for All</h3>
+            <p>Participated in the Yuva AI initiative promoting AI literacy and responsible adoption among youth.</p>
+        </div>
+        <div class="ach-card">
+            <span class="ach-badge">Workshop</span>
+            <h3>Design Thinking Workshop</h3>
+            <p>Completed an ACE-certified Design Thinking workshop focused on empathy-driven problem solving and prototyping.</p>
+        </div>
+        <div class="ach-card">
+            <span class="ach-badge">Coursera</span>
+            <h3>Introduction to Modern AI</h3>
+            <p>Completed a Coursera course covering foundational AI concepts, neural networks, and machine learning basics.</p>
+        </div>
+        <div class="ach-card">
+            <span class="ach-badge">NetAcad</span>
+            <h3>Engineering Physics Prerequisites</h3>
+            <p>Cisco NetAcad certified course reinforcing core physics concepts essential for engineering applications.</p>
+        </div>
+        <div class="ach-card">
+            <span class="ach-badge">NetAcad</span>
+            <h3>Revisiting Chemistry</h3>
+            <p>Refreshed foundational chemistry knowledge with focus on reactions, kinetics, and applied concepts.</p>
+        </div>
+        <div class="ach-card">
+            <span class="ach-badge">Event</span>
+            <h3>SkillSpardha Workshop</h3>
+            <p>Competed in SkillSpardha, a university-level technical skills competition testing applied engineering knowledge.</p>
+        </div>
+    </div>
+
+    <!-- AI -->
+    <div id="tab-ai" class="ach-panel">
+        <div class="ach-card">
+            <span class="ach-badge">AI Program</span>
+            <h3>AI for All (Ai4A)</h3>
+            <p>Completed the national AI for All program exploring AI applications across healthcare, education, and industry.</p>
+        </div>
+        <div class="ach-card">
+            <span class="ach-badge">AI Program</span>
+            <h3>Yuva AI for All</h3>
+            <p>Participated in the Yuva AI initiative promoting AI literacy and responsible adoption among youth.</p>
+        </div>
+        <div class="ach-card">
+            <span class="ach-badge">Coursera</span>
+            <h3>Introduction to Modern AI</h3>
+            <p>Completed a Coursera course covering foundational AI concepts, neural networks, and machine learning basics.</p>
+        </div>
+    </div>
+
+    <!-- COURSES -->
+    <div id="tab-courses" class="ach-panel">
+        <div class="ach-card">
+            <span class="ach-badge">Coursera</span>
+            <h3>Introduction to Modern AI</h3>
+            <p>Completed a Coursera course covering foundational AI concepts, neural networks, and machine learning basics.</p>
+        </div>
+        <div class="ach-card">
+            <span class="ach-badge">NetAcad</span>
+            <h3>Engineering Physics Prerequisites</h3>
+            <p>Cisco NetAcad certified course reinforcing core physics concepts essential for engineering applications.</p>
+        </div>
+        <div class="ach-card">
+            <span class="ach-badge">NetAcad</span>
+            <h3>Revisiting Chemistry</h3>
+            <p>Refreshed foundational chemistry knowledge with focus on reactions, kinetics, and applied concepts.</p>
+        </div>
+    </div>
+
+    <!-- EVENTS -->
+    <div id="tab-events" class="ach-panel">
+        <div class="ach-card">
+            <span class="ach-badge">Workshop</span>
+            <h3>Design Thinking Workshop</h3>
+            <p>Completed an ACE-certified Design Thinking workshop focused on empathy-driven problem solving and prototyping.</p>
+        </div>
+        <div class="ach-card">
+            <span class="ach-badge">Event</span>
+            <h3>SkillSpardha Workshop</h3>
+            <p>Competed in SkillSpardha, a university-level technical skills competition testing applied engineering knowledge.</p>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+    <h2 class="section-title">My Projects</h2>
+    <div class="section-line left"></div>
+    <div class="projects-grid reveal">
+        <div class="proj-card">
+            <span class="proj-tag">Physics Lab</span>
+            <h3>Ohm's Law & Circuit Analysis</h3>
+            <p>Experimental verification of Ohm's Law using resistor networks, measuring voltage-current relationships and analyzing series vs parallel circuits against theoretical predictions.</p>
+            <div class="tech-row">
+                <span class="tech-pill">Circuit Analysis</span>
+                <span class="tech-pill">Multimeter</span>
+                <span class="tech-pill">DC Circuits</span>
+            </div>
+        </div>
+        <div class="proj-card">
+            <span class="proj-tag">Chemistry Lab</span>
+            <h3>Chemical Reaction Rate Analysis</h3>
+            <p>Investigated how temperature and concentration affect reaction rates. Performed titration experiments and recorded kinetic data, applying concepts of activation energy and reaction mechanisms.</p>
+            <div class="tech-row">
+                <span class="tech-pill">Chemical Kinetics</span>
+                <span class="tech-pill">Titration</span>
+                <span class="tech-pill">Data Analysis</span>
+            </div>
+        </div>
+        <div class="proj-card">
+            <span class="proj-tag">AI Research</span>
+            <h3>AI Applications Research Report</h3>
+            <p>As part of Yuva AI for All and Ai4A programs, researched real-world AI applications across healthcare, education, and industry, producing a report on societal impact and AI ethics.</p>
+            <div class="tech-row">
+                <span class="tech-pill">Artificial Intelligence</span>
+                <span class="tech-pill">Research</span>
+                <span class="tech-pill">Ethics in AI</span>
+            </div>
+        </div>
+        <div class="proj-card">
+            <span class="proj-tag">Design Thinking</span>
+            <h3>Empathy-Driven Prototype Design</h3>
+            <p>In a structured Design Thinking workshop, identified real user problems, brainstormed solutions, and built low-fidelity prototypes using iterative, empathy-first engineering methodology.</p>
+            <div class="tech-row">
+                <span class="tech-pill">Design Thinking</span>
+                <span class="tech-pill">Prototyping</span>
+                <span class="tech-pill">Collaboration</span>
+            </div>
+        </div>
+        <div class="proj-card">
+            <span class="proj-tag">Engineering</span>
+            <h3>Physics Concept Map Reference</h3>
+            <p>Created detailed concept maps covering wave mechanics, thermodynamics, and optics — used as a study reference resource for junior batchmates across the department.</p>
+            <div class="tech-row">
+                <span class="tech-pill">Wave Mechanics</span>
+                <span class="tech-pill">Thermodynamics</span>
+                <span class="tech-pill">Optics</span>
+            </div>
+        </div>
+        <div class="proj-card">
+            <span class="proj-tag">Competition</span>
+            <h3>SkillSpardha Technical Challenge</h3>
+            <p>Competed in SkillSpardha university-level skill competition, demonstrating applied engineering knowledge, problem-solving under pressure, and technical communication skills.</p>
+            <div class="tech-row">
+                <span class="tech-pill">Problem Solving</span>
+                <span class="tech-pill">Technical Skills</span>
+                <span class="tech-pill">Competition</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+    <h2 class="section-title">Gallery & Certificates</h2>
+    <div class="section-line left"></div>
+    <div class="gallery-grid reveal">
+        <div class="cert-item" onclick="openLightbox('cert1.jpg')">
+            <img src="cert1.jpg" alt="Engineering Physics Prerequisites"
+                 onerror="this.src='https://via.placeholder.com/400x180/1a1a1a/c8f03c?text=Certificate+1';">
+            <div class="cert-label">Engineering Physics Prerequisites</div>
+        </div>
+        <div class="cert-item" onclick="openLightbox('cert2.jpg')">
+            <img src="cert2.jpg" alt="Revisiting Chemistry"
+                 onerror="this.src='https://via.placeholder.com/400x180/1a1a1a/c8f03c?text=Certificate+2';">
+            <div class="cert-label">Revisiting Chemistry</div>
+        </div>
+        <div class="cert-item" onclick="openLightbox('cert3.jpg')">
+            <img src="cert3.jpg" alt="Introduction to Modern AI"
+                 onerror="this.src='https://via.placeholder.com/400x180/1a1a1a/c8f03c?text=Certificate+3';">
+            <div class="cert-label">Introduction to Modern AI</div>
+        </div>
+        <div class="cert-item" onclick="openLightbox('cert4.jpg')">
+            <img src="cert4.jpg" alt="Yuva AI for All"
+                 onerror="this.src='https://via.placeholder.com/400x180/1a1a1a/c8f03c?text=Certificate+4';">
+            <div class="cert-label">Yuva AI for All</div>
+        </div>
+        <div class="cert-item" onclick="openLightbox('cert5.jpg')">
+            <img src="cert5.jpg" alt="SkillSpardha Workshop"
+                 onerror="this.src='https://via.placeholder.com/400x180/1a1a1a/c8f03c?text=Certificate+5';">
+            <div class="cert-label">SkillSpardha Workshop</div>
+        </div>
+        <div class="cert-item" onclick="openLightbox('cert6.jpg')">
+            <img src="cert6.jpg" alt="AI for All"
+                 onerror="this.src='https://via.placeholder.com/400x180/1a1a1a/c8f03c?text=Certificate+6';">
+            <div class="cert-label">AI for All (Ai4A)</div>
+        </div>
+        <div class="cert-item" onclick="openLightbox('cert7.jpg')">
+            <img src="cert7.jpg" alt="Design Thinking Workshop"
+                 onerror="this.src='https://via.placeholder.com/400x180/1a1a1a/c8f03c?text=Certificate+7';">
+            <div class="cert-label">Design Thinking Workshop</div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <h2 class="section-title">Contact Me</h2>
+    <div class="section-line left"></div>
+    <div class="contact-wrap reveal">
+        <div class="contact-info">
+            <h3>Let's Connect</h3>
+            <p>I'm open to internships, collaborations, and conversations about AI, engineering, and technology. Feel free to reach out!</p>
+            <ul class="contact-items">
+                <li><span class="ci">📍</span> Aurangabad, Maharashtra, India</li>
+                <li><span class="ci">🎓</span> MIT Vishwaprayag University</li>
+                <li><span class="ci">📅</span> Graduating 2026</li>
+                <li><span class="ci">💡</span> Open to Internships & Collaborations</li>
+            </ul>
+        </div>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <input type="text" placeholder="Subject">
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message ✉</button>
+        </form>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>Designed & built by <span>Abed Kazi</span> · MIT Vishwaprayag University · Class of 2026</p>
+    <p style="margin-top:6px;">Aurangabad, Maharashtra, India</p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+    <span class="lb-close" onclick="closeLightbox()">×</span>
+    <img id="lbImg" src="" alt="Certificate">
+</div>
+
+<script>
+    // Theme toggle
+    function toggleTheme() {
+        const html = document.documentElement;
+        const btn = document.querySelector('.theme-toggle');
+        if (html.dataset.theme === 'dark') {
+            html.dataset.theme = 'light';
+            btn.textContent = '🌙 Dark';
+        } else {
+            html.dataset.theme = 'dark';
+            btn.textContent = '☀️ Light';
+        }
+    }
+
+    // Lightbox
+    function openLightbox(src) {
+        document.getElementById('lbImg').src = src;
+        document.getElementById('lightbox').classList.add('open');
+    }
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('open');
+    }
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
+
+    // Achievement tabs
+    function switchTab(btn, tabId) {
+        document.querySelectorAll('.ach-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.ach-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+    }
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Contact form
+    function handleSubmit(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('button');
+        btn.textContent = '✅ Message Sent!';
+        btn.style.background = '#4CAF50';
+        setTimeout(() => {
+            btn.textContent = 'Send Message ✉';
+            btn.style.background = '';
+            e.target.reset();
+        }, 3000);
+    }
+</script>
+</body>
+</html>
